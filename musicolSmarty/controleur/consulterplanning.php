@@ -1,5 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/include/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+use Smarty\Smarty;
 
 // Récupération pour chaque cours planifié du libellé du jour et du libellé du cours
 // Le libellé du cours correspond soit à celui du cours pour un cours collectif, soit à l'intitulé de l'instrument pour un cours individuel (idTypeCours = 1)
@@ -27,6 +29,10 @@ foreach ($lePlanning as $jour) {
 }
 
 // préparation de la vue en lui transmettant les paramètres attendus : l'année et un tableau contenant les lignes à afficher
-
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
+$vue = new Smarty();
+$vue->assign('annee', date(('Y')));
+$vue->assign('lePlanning', $lesLignes);
+$vue->display('../vue/leplanning.tpl');
 
 
